@@ -126,6 +126,10 @@
     setHomeLock(home);
     if (src === currentSrc) { if (!home) scheduleResizes(); return; }
     currentSrc = src;
+    // Al cambiar de página, volver el iframe al alto de la ventana: si no, se
+    // queda con el alto de la página anterior (p. ej. Florerías, muy larga) y
+    // la nueva página arrastra todo ese blanco sobrante abajo.
+    if (!home) frame.style.height = window.innerHeight + 'px';
     loading.classList.remove('hidden');
     frame.src = src;
     window.scrollTo(0, 0);

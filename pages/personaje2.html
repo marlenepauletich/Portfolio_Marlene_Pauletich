@@ -22,6 +22,7 @@
     max-width: 1920px;
     margin: 0 auto;
     container-type: inline-size;
+    padding-bottom: 5cm; /* solo 5cm de blanco después de "Próximo personaje" */
   }
   .imgwrap {
     position: relative;
@@ -55,10 +56,10 @@
      so the link target can change per character without re-exporting artwork. */
   .next-bar {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: flex-end;
     width: 100%;
-    aspect-ratio: 1920 / 120;
+    padding-top: 1.5cqw;
     background: #fff;
     text-decoration: none;
     -webkit-tap-highlight-color: transparent;
@@ -70,6 +71,7 @@
     font-size: 3.2cqw;
     padding-right: clamp(16px, 2.6cqw, 32px);
     white-space: nowrap;
+    line-height: 1;
   }
   .next-bar:focus-visible span {
     outline: 2px solid rgba(23,21,18,0.5);
