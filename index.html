@@ -71,10 +71,13 @@
     try {
       var doc = frame.contentDocument;
       if (!doc) return;
-      var h = Math.max(
-        doc.documentElement ? doc.documentElement.scrollHeight : 0,
-        doc.body ? doc.body.scrollHeight : 0
-      );
+      // Medir el contenido real (body), no el documento: el documento nunca
+      // es más bajo que el propio iframe, así que medirlo impedía que el
+      // iframe se achicara y dejaba blanco sobrante debajo de las páginas.
+      var b = doc.body;
+      if (!b) return;
+      var bcs = doc.defaultView.getComputedStyle(b);
+      var h = Math.ceil(b.scrollHeight + (parseFloat(bcs.marginTop) || 0) + (parseFloat(bcs.marginBottom) || 0));
       if (h > 0) frame.style.height = h + 'px';
     } catch (e) { /* ignore cross-origin or not-ready */ }
   }
