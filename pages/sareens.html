@@ -14,14 +14,15 @@
   .page { position: relative; width: 100%; max-width: 1920px; margin: 0 auto; container-type: inline-size; }
   .imgwrap { position: relative; line-height: 0; }
   .imgwrap img { display: block; width: 100%; height: auto; }
+  .stack img { display: block; width: 100%; height: auto; margin: 0; }
   a.hotspot { position: absolute; display: block; text-indent: -9999px; outline: none; -webkit-tap-highlight-color: transparent; }
   a.hotspot:focus-visible { box-shadow: 0 0 0 3px rgba(255,255,255,0.85); border-radius: 999px; }
-  /* "Volver atrás" pill — baked into the artwork at top left of the board */
+  /* "Volver atrás" pill — baked into el hero de este proyecto */
   .hotspot--back {
-    left: 0.660%;
-    top: 0.259%;
-    width: 10.417%;
-    height: 0.551%;
+    left: 0.8%;
+    top: 2.3%;
+    width: 10.3%;
+    height: 3.2%;
     border-radius: 999px;
   }
   .counter {
@@ -33,12 +34,23 @@
   .counter .tot { font-size: .5em; opacity: .7; }
 </style>
 </head>
-<body><script>function __siteNav(r){try{parent.postMessage({__siteNav:r},"*");}catch(e){}return false;}</script>
+<body><script>function __siteNav(r){try{parent.postMessage({__siteNav:r},"*");}catch(e){}return false;}function __siteBack(){try{parent.postMessage({__siteBack:true},"*");}catch(e){}return false;}</script>
   <div class="page">
     <div class="imgwrap">
-      <img src="sirenas.jpg" alt="Sareens by Levi's — Proyecto 04 — Colección cápsula denim" draggable="false">
-      <a class="hotspot hotspot--back" href="#" onclick="return __siteNav('home/proyectos')" aria-label="Volver atrás">Volver atrás</a>
+      <img src="sareens_hero.jpg" alt="Sareens by Levi's — Proyecto 04 — Colección cápsula denim" draggable="false">
+      <a class="hotspot hotspot--back" href="#" onclick="return __siteBack()" aria-label="Volver atrás">Volver atrás</a>
       <div class="counter"><span>04</span><span class="tot">/ 9</span></div>
+    </div>
+    <div class="stack">
+      <img src="sareens_title.jpg" alt="Proyecto 04 — Proyecto Denim. Sareens by Levi's" draggable="false">
+      <img src="sareens_moodboard.jpg" alt="Moodboard y paleta de color" draggable="false">
+      <img src="sareens_poem.jpg" alt="Texto: una noche en Berlín, colección cápsula Sareens by Levi's" draggable="false">
+      <img src="sareens_photo.jpg" alt="Fotografía de la colección" draggable="false">
+      <img src="sareens_lineup.jpg" alt="Line up: bocetos y renders de personajes" draggable="false">
+      <img src="sareens_cuadro.jpg" alt="Cuadro de colección: fichas técnicas" draggable="false">
+      <img src="sareens_gallery1.jpg" alt="Recursos visuales" draggable="false">
+      <img src="sareens_gallery2.jpg" alt="Recursos visuales" draggable="false">
+      <img src="sareens_gallery3.jpg" alt="Recursos visuales" draggable="false">
     </div>
   </div>
 </body>
