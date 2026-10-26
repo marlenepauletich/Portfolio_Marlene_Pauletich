@@ -96,7 +96,12 @@
   // mientras la sección activa es "home", fijamos la altura del iframe a un
   // viewport y bloqueamos el scroll del documento exterior, en vez de dejar
   // que el resize automático la estire.
-  function isHome(){ return parseHash().page === 'home'; }
+  // "proyectos" también es una página de una sola pantalla (100vh + overflow
+  // hidden), así que necesita el mismo tratamiento fijo que Home; si no, el
+  // auto-resize la achica y la lista de proyectos queda invisible.
+  var FIXED_PAGES = { home: true, proyectos: true };
+  function isFixedPage(p){ return !!FIXED_PAGES[p]; }
+  function isHome(){ return isFixedPage(parseHash().page); }
 
   function setHomeLock(lock){
     if (lock) {
@@ -117,7 +122,7 @@
     var r = parseHash();
     var file = FILES[r.page];
     var src = file + (r.anchor ? ('#' + r.anchor) : '');
-    var home = (r.page === 'home');
+    var home = isFixedPage(r.page);
     setHomeLock(home);
     if (src === currentSrc) { if (!home) scheduleResizes(); return; }
     currentSrc = src;
