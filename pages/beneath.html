@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Beneath the Skin — Marlene Pauletich San Juan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    width: 100%;
+  }
+  .page {
+    position: relative;
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+    container-type: inline-size;
+  }
+  .imgwrap {
+    position: relative;
+    line-height: 0;
+  }
+  .imgwrap img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  a.hotspot {
+    position: absolute;
+    display: block;
+    text-indent: -9999px;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  a.hotspot:focus-visible {
+    box-shadow: 0 0 0 3px rgba(255,255,255,0.85);
+    border-radius: 999px;
+  }
+  /* "Volver atrás" pill — baked into the artwork at top left of the hero photo */
+  .hotspot--back {
+    left: 0.83%;
+    top: 0.4%;
+    width: 10.57%;
+    height: 0.47%;
+    border-radius: 999px;
+  }
+  /* page counter — bottom-right of the hero photo, same treatment as "Las florerías son el prisma" */
+  .counter {
+    position: absolute;
+    top: 13.8%;
+    right: clamp(20px, 4vw, 48px);
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    color: #fff;
+    mix-blend-mode: difference;
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    pointer-events: none;
+  }
+  .counter .tot {
+    font-size: .5em;
+    opacity: .7;
+  }
+</style>
+</head>
+<body><script>function __siteNav(r){try{parent.postMessage({__siteNav:r},"*");}catch(e){}return false;}</script>
+  <div class="page">
+    <div class="imgwrap">
+      <img src="beneath_skin.jpg" alt="Beneath the Skin — Proyecto 03 — Sastrería hombre" draggable="false">
+      <a class="hotspot hotspot--back" href="#" onclick="return __siteNav('home/proyectos')" aria-label="Volver atrás">Volver atrás</a>
+      <div class="counter"><span>03</span><span class="tot">/ 9</span></div>
+    </div>
+  </div>
+</body>
+</html>

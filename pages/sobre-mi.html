@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sobre mí — Marlene Pauletich San Juan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Martel:wght@400;600;700&family=Elms+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #fff; width: 100%; }
+  .page { position: relative; width: 100%; max-width: 1536px; margin: 0 auto; container-type: inline-size; padding-bottom: clamp(24px, 4cqw, 64px); }
+  a { color: inherit; }
+
+  .heroStage { position: relative; width: 100%; aspect-ratio: 1536 / 820; }
+  .bodyStage { position: relative; width: 100%; aspect-ratio: 1536 / 2030; margin-top: clamp(28px, 5cqw, 76px); }
+
+  .abs { position: absolute; }
+
+  .backpill { position: absolute; top: 2%; right: 0.65%; background: #9a9a7e; color: #fff; font-family: 'Elms Sans',sans-serif; font-weight: 600; font-size: clamp(11px, 0.78cqw, 13px); letter-spacing: .04em; padding: 0.6% 1.4%; border-radius: 999px; text-decoration: none; white-space: nowrap; }
+
+  .title { left: 4.88%; top: 2%; font-family: 'Playfair Display', serif; font-weight: 600; font-size: clamp(22px, 3.581cqw, 55px); color: #171512; margin: 0; white-space: nowrap; }
+
+  .photo { left: 0.65%; top: 11.6%; width: 60.87%; }
+  .photo img { display: block; width: 100%; height: auto; }
+  .caption { left: 28.71%; top: 95.1%; font-family: 'Courier New', monospace; font-size: clamp(9px, 0.977cqw, 15px); color: #171512; white-space: nowrap; }
+
+  .bio { left: 63.54%; top: 22.56%; width: 29.10%; font-family: 'Elms Sans', sans-serif; font-weight: 400; font-size: clamp(11px, 1.042cqw, 16px); line-height: 1.75; color: #171512; text-align: center; }
+  .bio p { margin: 0 0 1.5em 0; }
+  .bio p:last-child { margin-bottom: 0; }
+
+  .tab { font-family: 'Martel', serif; font-weight: 400; font-size: clamp(16px, 2.083cqw, 32px); color: #171512; cursor: pointer; background: none; border: none; padding: 0; text-align: left; white-space: nowrap; }
+  .tab.active { font-weight: 600; text-decoration: underline; text-underline-offset: .18em; }
+  #tab-upcycling { left: 4.88%; top: 0.3%; }
+  #tab-skills { left: 26.04%; top: 0.3%; }
+
+  .introText { left: 4.88%; top: 3.8%; width: 44.14%; font-family: 'Elms Sans', sans-serif; font-weight: 400; font-size: clamp(11px, 1.042cqw, 16px); line-height: 1.6; color: #171512; }
+  .introText p { margin: 0 0 1.2em 0; }
+  .introText p:last-child { margin-bottom: 0; }
+
+  .skillsList { left: 26.63%; top: 4.5%; width: 68.62%; font-family: 'Elms Sans', sans-serif; font-weight: 400; font-size: clamp(11px, 1.042cqw, 16px); line-height: 1.52; color: #171512; }
+  .skillsList ul { margin: 0; padding: 0; list-style: none; }
+  .skillsList li::before { content: '· '; }
+
+  .moreCaption { left: 4.88%; top: 96.19%; font-family: 'Elms Sans', sans-serif; font-weight: 400; font-size: clamp(10px, 1.042cqw, 16px); color: #171512; white-space: nowrap; }
+  .tiktokLink { left: 4.88%; top: 99.05%; font-family: 'Elms Sans', sans-serif; font-weight: 400; font-size: clamp(10px, 1.042cqw, 16px); color: #171512; text-decoration: underline; white-space: nowrap; }
+
+  .vidcell { position: absolute; background: #fff; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+  .vidcell video { max-width: 100%; max-height: 100%; width: auto; height: auto; display: block; background: #fff; }
+  .playbtn { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 15%; aspect-ratio: 1/1; min-width: 40px; max-width: 72px; border-radius: 50%; background: rgba(20,20,20,.58); display: flex; align-items: center; justify-content: center; pointer-events: none; transition: opacity .15s; }
+  .playbtn svg { width: 42%; height: 42%; margin-left: 4%; fill: #fff; }
+  .vidcell.playing .playbtn { opacity: 0; }
+  .vidcell button.vidhit { position: absolute; inset: 0; border: none; background: transparent; padding: 0; margin: 0; cursor: pointer; }
+  .vidcell.playing button.vidhit { pointer-events: none; }
+
+  .skillsPanel { display: none; }
+  .skillsPanel.active { display: block; }
+  .upcPanel { display: none; }
+  .upcPanel.active { display: block; }
+</style>
+</head>
+<body><script>function __siteNav(r){try{parent.postMessage({__siteNav:r},"*");}catch(e){}return false;}</script>
+  <div class="page">
+
+    <div class="heroStage">
+      <a class="backpill" href="#" onclick="return __siteNav('home')">Volver atrás</a>
+      <h1 class="abs title">Sobre mi</h1>
+      <div class="abs photo"><img src="collage_photo.jpg" alt="Moodboard — Marlene Pauletich San Juan" draggable="false"></div>
+      <div class="abs caption">Marlene Pauletich San Juan</div>
+      <div class="abs bio">
+        <p>Soy Marlene Pauletich San Juan, diseñadora de moda, vestuario y estilista.</p>
+        <p>En cuanto a formación profesional recientemente terminé un máster en Diseño de Moda en IED Barcelona y previamente me formé en Argentina como Productora de Moda y Licenciada en Marketing.</p>
+        <p>Este moodboard representa mi último año como diseñadora de moda, busco profundizar un poco en la mezcla que suele ser el proceso creativo y como poco a poco me voy dando cuenta que todos mis proyectos tienen un hilo conductor, mi esencia.</p>
+        <p>Mis principales intereses son la creación de un universo creativo cohesivo, la construcción de personajes/colecciones desde un detonante creativo y la transformación de prendas a través del upcycling.</p>
+      </div>
+    </div>
+
+    <div class="bodyStage">
+      <button class="abs tab" id="tab-upcycling" data-show="upcycling">Upcycling</button>
+      <button class="abs tab" id="tab-skills" data-show="skills">Skills</button>
+
+      <div class="upcPanel">
+        <div class="abs introText">
+          <p>Esta sección se compone por una serie de videos propios en los que busco resignificar y darles nueva vida e identidad a prendas ya existentes por medio de diferentes técnicas de upcycling: deconstrucción y reconstrucción de prenda, sublimado de imágenes, collage textil, utilización de tintes textiles, aplicación de strass, remaches y fornituras varias.</p>
+          <p>El upcycling fue para mi el primer acercamiento a prendas, sus texturas y formas de manipulación. Previo al máster de diseño de moda donde aprendí las técnicas "correctas" de confección y terminación de prendas, esta sección resalta mi proceso de experimentación con la maquina y autoaprendizaje de la misma y de como se comportan los diferentes géneros.</p>
+        </div>
+
+        <div class="abs vidcell" style="left:3.77%; top:22.50%; width:26.44%; height:35.57%;">
+          <video class="vid" poster="videos/cover1.jpg" preload="none" playsinline controls src="videos/upc1.mp4"></video>
+          <div class="playbtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <button class="vidhit" aria-label="Reproducir video 1"></button>
+        </div>
+        <div class="abs vidcell" style="left:36.85%; top:22.50%; width:26.44%; height:35.57%;">
+          <video class="vid" poster="videos/cover2.jpg" preload="none" playsinline controls src="videos/upc2.mp4"></video>
+          <div class="playbtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <button class="vidhit" aria-label="Reproducir video 2"></button>
+        </div>
+        <div class="abs vidcell" style="left:69.79%; top:22.50%; width:26.44%; height:35.57%;">
+          <video class="vid" poster="videos/cover3.jpg" preload="none" playsinline controls src="videos/upc3.mp4"></video>
+          <div class="playbtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <button class="vidhit" aria-label="Reproducir video 3"></button>
+        </div>
+        <div class="abs vidcell" style="left:3.81%; top:59.24%; width:26.37%; height:35.47%;">
+          <video class="vid" poster="videos/cover4.jpg" preload="none" playsinline controls src="videos/upc4.mp4"></video>
+          <div class="playbtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <button class="vidhit" aria-label="Reproducir video 4"></button>
+        </div>
+        <div class="abs vidcell" style="left:36.88%; top:59.24%; width:26.37%; height:35.47%;">
+          <video class="vid" poster="videos/cover5.jpg" preload="none" playsinline controls src="videos/upc5.mp4"></video>
+          <div class="playbtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <button class="vidhit" aria-label="Reproducir video 5"></button>
+        </div>
+        <div class="abs vidcell" style="left:69.82%; top:59.24%; width:26.37%; height:35.47%;">
+          <video class="vid" poster="videos/cover6.jpg" preload="none" playsinline controls src="videos/upc6.mp4"></video>
+          <div class="playbtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <button class="vidhit" aria-label="Reproducir video 6"></button>
+        </div>
+
+        <div class="abs moreCaption">Más proyectos de upcycling:</div>
+        <a class="abs tiktokLink" href="https://www.tiktok.com/@marluusan" target="_blank" rel="noopener">https://www.tiktok.com/@marluusan</a>
+      </div>
+
+      <div class="skillsPanel">
+        <div class="abs skillsList">
+          <ul>
+            <li>Photoshop · Illustrator · InDesign · Figma · Procreate · Excel · Canva · Claude · CapCut · TikTok · Pinterest</li>
+            <li>Diseño de indumentaria y estilismo</li>
+            <li>Investigación visual y desarrollo de conceptos</li>
+            <li>Teoría del color y composición de siluetas</li>
+            <li>Desarrollo de moodboards</li>
+            <li>Organización y atención al detalle</li>
+            <li>Confección, modificación y upcycling de prendas</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+<script>
+  var tabUp = document.getElementById('tab-upcycling');
+  var tabSk = document.getElementById('tab-skills');
+  var upcPanel = document.querySelector('.upcPanel');
+  var skPanel = document.querySelector('.skillsPanel');
+
+  function showTab(which){
+    var isUp = which === 'upcycling';
+    tabUp.classList.toggle('active', isUp);
+    tabSk.classList.toggle('active', !isUp);
+    upcPanel.classList.toggle('active', isUp);
+    skPanel.classList.toggle('active', !isUp);
+    if (!isUp) {
+      document.querySelectorAll('.vid').forEach(function(v){ v.pause(); });
+    }
+  }
+  tabUp.addEventListener('click', function(){ showTab('upcycling'); });
+  tabSk.addEventListener('click', function(){ showTab('skills'); });
+  showTab('upcycling');
+
+  var videos = Array.from(document.querySelectorAll('.vid'));
+  videos.forEach(function(v){
+    var cell = v.closest('.vidcell');
+    var hit = cell.querySelector('.vidhit');
+    hit.addEventListener('click', function(){ v.play(); });
+    v.addEventListener('play', function(){
+      cell.classList.add('playing');
+      videos.forEach(function(other){ if (other !== v) other.pause(); });
+    });
+    v.addEventListener('pause', function(){ cell.classList.remove('playing'); });
+    v.addEventListener('ended', function(){ cell.classList.remove('playing'); });
+  });
+</script>
+</body>
+</html>

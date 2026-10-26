@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Personaje 2 — Las florerías son el prisma</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    width: 100%;
+  }
+  .page {
+    position: relative;
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+    container-type: inline-size;
+  }
+  .imgwrap {
+    position: relative;
+    line-height: 0;
+  }
+  .imgwrap img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  a.hotspot {
+    position: absolute;
+    display: block;
+    text-indent: -9999px;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  a.hotspot:focus-visible {
+    box-shadow: 0 0 0 3px rgba(255,255,255,0.85);
+    border-radius: 999px;
+  }
+  /* "Volver atrás" pill — top left, positioned against the photo only */
+  .hotspot--back {
+    left: 0.89%;
+    top: 0.39%;
+    width: 9.43%;
+    height: 0.52%;
+    border-radius: 999px;
+  }
+  /* "Próximo personaje" footer bar — built in code, plain white background,
+     so the link target can change per character without re-exporting artwork. */
+  .next-bar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    aspect-ratio: 1920 / 120;
+    background: #fff;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .next-bar span {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    color: #171512;
+    font-size: 3.2cqw;
+    padding-right: clamp(16px, 2.6cqw, 32px);
+    white-space: nowrap;
+  }
+  .next-bar:focus-visible span {
+    outline: 2px solid rgba(23,21,18,0.5);
+    outline-offset: 6px;
+  }
+</style>
+</head>
+<body><script>function __siteNav(r){try{parent.postMessage({__siteNav:r},"*");}catch(e){}return false;}</script>
+  <div class="page">
+    <div class="imgwrap">
+      <img src="personaje2.jpg" alt="Personaje 2 — Las florerías son el prisma" draggable="false">
+      <a class="hotspot hotspot--back" href="#" onclick="return __siteNav('florerias/elige-tu-personaje')" aria-label="Volver atrás">Volver atrás</a>
+    </div>
+    <a class="next-bar" href="#" onclick="return __siteNav('personaje3')" aria-label="Próximo personaje">
+      <span>Próximo personaje</span>
+    </a>
+  </div>
+</body>
+</html>

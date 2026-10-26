@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Portfolio Marlene Pauletich San Juan</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #fff; width: 100%; }
+  #frame {
+    display: block;
+    width: 100%;
+    border: 0;
+    background: #fff;
+    /* height is set by JS once the inner page reports its real size */
+  }
+  #loading {
+    position: fixed; inset: 0; background: #fff; display: flex;
+    align-items: center; justify-content: center;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 13px; color: #9a9a7e; letter-spacing: .08em; text-transform: uppercase;
+    transition: opacity .25s ease;
+    pointer-events: none;
+  }
+  #loading.hidden { opacity: 0; }
+</style>
+</head>
+<body>
+  <div id="loading">Cargando…</div>
+  <iframe id="frame" title="Marlene Pauletich San Juan — Portfolio" scrolling="no"></iframe>
+<script>
+(function(){
+  var FILES = {
+    "home": "pages/home.html",
+    "sobre-mi": "pages/sobre-mi.html",
+    "proyectos": "pages/proyectos.html",
+    "contacto": "pages/contacto.html",
+    "mosaico": "pages/mosaico.html",
+    "florerias": "pages/florerias.html",
+    "puerto": "pages/puerto.html",
+    "ropamama": "pages/ropamama.html",
+    "dnim": "pages/dnim.html",
+    "trapo": "pages/trapo.html",
+    "sareens": "pages/sareens.html",
+    "beneath": "pages/beneath.html",
+    "personaje1": "pages/personaje1.html",
+    "personaje2": "pages/personaje2.html",
+    "personaje3": "pages/personaje3.html",
+    "personaje4": "pages/personaje4.html"
+  };
+
+  var frame = document.getElementById('frame');
+  var loading = document.getElementById('loading');
+  var currentSrc = null;
+  var resizeTimer = null;
+
+  function parseHash(){
+    var h = location.hash || '';
+    h = h.replace(/^#\/?/, '');
+    if (!h) return { page: 'home', anchor: null };
+    var parts = h.split('/');
+    var page = parts[0] || 'home';
+    var anchor = parts.length > 1 ? parts.slice(1).join('/') : null;
+    if (!FILES[page]) page = 'home';
+    return { page: page, anchor: anchor };
+  }
+
+  function resizeFrame(){
+    try {
+      var doc = frame.contentDocument;
+      if (!doc) return;
+      var h = Math.max(
+        doc.documentElement ? doc.documentElement.scrollHeight : 0,
+        doc.body ? doc.body.scrollHeight : 0
+      );
+      if (h > 0) frame.style.height = h + 'px';
+    } catch (e) { /* ignore cross-origin or not-ready */ }
+  }
+
+  function scheduleResizes(){
+    resizeFrame();
+    [100, 350, 800, 1600].forEach(function(ms){
+      setTimeout(resizeFrame, ms);
+    });
+  }
+
+  // --- Home: página fija, sin barra de scroll ---
+  // home.html está pensada para ocupar exactamente un viewport (su propio CSS
+  // interno ya usa overflow:hidden + height:100%). Pero el resize automático
+  // de abajo (que agranda el iframe para que entre TODO el scrollHeight del
+  // documento interno) ignora ese overflow:hidden y de todos modos estira el
+  // iframe a la altura real y completa del documento — eso era lo que dejaba
+  // una barra de scroll y un espacio en blanco enorme debajo de Home. Por eso,
+  // mientras la sección activa es "home", fijamos la altura del iframe a un
+  // viewport y bloqueamos el scroll del documento exterior, en vez de dejar
+  // que el resize automático la estire.
+  function isHome(){ return parseHash().page === 'home'; }
+
+  function setHomeLock(lock){
+    if (lock) {
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.height = '100%';
+      document.body.style.height = '100%';
+      frame.style.height = '100%';
+    } else {
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+      document.documentElement.style.height = '';
+      document.body.style.height = '';
+    }
+  }
+
+  function render(fromPopstate){
+    var r = parseHash();
+    var file = FILES[r.page];
+    var src = file + (r.anchor ? ('#' + r.anchor) : '');
+    var home = (r.page === 'home');
+    setHomeLock(home);
+    if (src === currentSrc) { if (!home) scheduleResizes(); return; }
+    currentSrc = src;
+    loading.classList.remove('hidden');
+    frame.src = src;
+    window.scrollTo(0, 0);
+  }
+
+  // --- Pila de navegación "de verdad vuelta atrás" ---
+  // No usamos window.history.back() porque eso vuelve literalmente un paso
+  // en el historial del navegador, y entrar/salir de un "personaje" (una
+  // sub-página dentro de un proyecto) también empuja pasos ahí — entonces
+  // "volver atrás" terminaba yendo a un personaje recién visto en vez de a
+  // Proyectos o Home. En cambio, llevamos nuestra propia pila de SECCIONES
+  // (home, proyectos, y cada proyecto), ignorando a propósito las páginas de
+  // personaje: nunca se empujan a la pila, así que "volver atrás" siempre
+  // aterriza en la sección anterior real, sin importar cuántos personajes se
+  // hayan visitado en el medio.
+  var PERSONAJE_RE = /^personaje/;
+  var navStack = [parseHash().page];
+
+  function pushSection(route){
+    if (PERSONAJE_RE.test(route)) return; // los personajes no cuentan como "sección"
+    if (navStack[navStack.length - 1] !== route) {
+      navStack.push(route);
+    }
+  }
+
+  function goBackSmart(){
+    if (navStack.length > 1) {
+      navStack.pop(); // saca la sección actual
+      var prev = navStack[navStack.length - 1];
+      location.hash = '#/' + prev;
+    } else {
+      location.hash = '#/home';
+    }
+  }
+
+  // --- Gesto de touchpad: deslizar dos dedos de izquierda a derecha = volver atrás ---
+  // El contenido real vive dentro del iframe interno (#frame). Como ese iframe
+  // es del mismo origen que este documento (ambos son archivos publicados del
+  // mismo artifact), podemos adjuntar el listener directamente a su
+  // contentWindow una vez que cada página termina de cargar.
+  var swipeAccX = 0, swipeAccY = 0, swipeTriggered = false, swipeResetTimer = null;
+  var SWIPE_THRESHOLD = 90; // px acumulados antes de disparar
+  var swipeAttachedDoc = null;
+
+  function handleSwipeWheel(e){
+    if (swipeTriggered) return;
+    // Ignorar gestos que claramente son scroll vertical normal.
+    swipeAccX += e.deltaX;
+    swipeAccY += e.deltaY;
+    clearTimeout(swipeResetTimer);
+    swipeResetTimer = setTimeout(function(){ swipeAccX = 0; swipeAccY = 0; }, 350);
+    // Deslizar dos dedos horizontalmente (en cualquiera de las dos direcciones,
+    // porque el signo de deltaX depende del sistema/navegador y de si el
+    // "scroll natural" está activado) = volver atrás. No hay gesto de
+    // "avanzar", así que no hace falta distinguir el sentido.
+    if (Math.abs(swipeAccX) > SWIPE_THRESHOLD && Math.abs(swipeAccX) > Math.abs(swipeAccY) * 1.4) {
+      swipeTriggered = true;
+      swipeAccX = 0; swipeAccY = 0;
+      setTimeout(function(){ swipeTriggered = false; }, 900);
+      goBackSmart();
+    }
+  }
+
+  function attachSwipeBack(){
+    try {
+      var innerWin = frame.contentWindow;
+      var innerDoc = frame.contentDocument;
+      if (!innerWin || !innerDoc) { console.log('[swipe-debug] attachSwipeBack: no innerWin/innerDoc', !!innerWin, !!innerDoc); return; }
+      if (innerDoc === swipeAttachedDoc) { console.log('[swipe-debug] attachSwipeBack: already attached to this doc'); return; }
+      swipeAttachedDoc = innerDoc;
+      innerWin.addEventListener('wheel', handleSwipeWheel, { passive: true });
+      console.log('[swipe-debug] attachSwipeBack: OK, listener attached to inner window');
+    } catch (e) { console.log('[swipe-debug] attachSwipeBack FAILED (cross-origin?):', e && e.message); }
+  }
+
+  frame.addEventListener('load', function(){
+    loading.classList.add('hidden');
+    var home = isHome();
+    setHomeLock(home);
+    if (!home) scheduleResizes();
+    attachSwipeBack();
+  });
+
+  // Igual que arriba, por si acaso el gesto ocurre sobre este documento
+  // exterior (por ejemplo durante la carga).
+  window.addEventListener('wheel', handleSwipeWheel, { passive: true });
+
+  window.addEventListener('hashchange', render);
+  window.addEventListener('resize', function(){
+    if (isHome()) return; // en Home la altura es fija (un viewport), no hay que recalcularla
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(resizeFrame, 120);
+  });
+  window.addEventListener('message', function(ev){
+    var data = ev.data;
+    if (data && typeof data === 'object' && typeof data.__siteNav === 'string') {
+      pushSection(data.__siteNav);
+      var target = '#/' + data.__siteNav;
+      if (location.hash === target) { render(); } else { location.hash = target; }
+    } else if (data && data.__siteBack === true) {
+      goBackSmart();
+    }
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

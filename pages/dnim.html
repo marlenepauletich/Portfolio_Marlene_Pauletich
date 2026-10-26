@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dnim over dnim — Marlene Pauletich San Juan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #fff; width: 100%; }
+  .page { position: relative; width: 100%; max-width: 1920px; margin: 0 auto; container-type: inline-size; }
+  .imgwrap { position: relative; line-height: 0; }
+  .imgwrap img { display: block; width: 100%; height: auto; }
+  a.hotspot { position: absolute; display: block; text-indent: -9999px; outline: none; -webkit-tap-highlight-color: transparent; }
+  a.hotspot:focus-visible { box-shadow: 0 0 0 3px rgba(255,255,255,0.85); border-radius: 999px; }
+  /* "Volver atrás" pill — baked into the artwork at top left of the board */
+  .hotspot--back {
+    left: 0.833%;
+    top: 0.639%;
+    width: 9.896%;
+    height: 0.625%;
+    border-radius: 999px;
+  }
+  .counter {
+    position: absolute; top: 22.2%; right: clamp(20px, 4vw, 48px);
+    font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 6vw, 4rem);
+    color: #1a1a1a; display: flex; align-items: baseline; gap: 14px;
+    pointer-events: none;
+  }
+  .counter .tot { font-size: .5em; opacity: .7; }
+</style>
+</head>
+<body><script>function __siteNav(r){try{parent.postMessage({__siteNav:r},"*");}catch(e){}return false;}</script>
+  <div class="page">
+    <div class="imgwrap">
+      <img src="dnim.jpg" alt="Dnim over dnim — Proyecto 08 — Styling" draggable="false">
+      <a class="hotspot hotspot--back" href="#" onclick="return __siteNav('home/proyectos')" aria-label="Volver atrás">Volver atrás</a>
+      <div class="counter"><span>08</span><span class="tot">/ 9</span></div>
+    </div>
+  </div>
+</body>
+</html>
