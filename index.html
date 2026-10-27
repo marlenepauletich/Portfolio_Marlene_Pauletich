@@ -24,11 +24,26 @@
     pointer-events: none;
   }
   #loading.hidden { opacity: 0; }
+  #langSwitch {
+    position: fixed; right: 16px; bottom: 16px; z-index: 10;
+    display: flex; gap: 2px; padding: 3px; border-radius: 999px;
+    background: rgba(255,255,255,.92); box-shadow: 0 1px 6px rgba(0,0,0,.15);
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+  }
+  #langSwitch button {
+    border: 0; background: transparent; color: #171512; cursor: pointer;
+    font: inherit; font-size: 12px; letter-spacing: .08em; padding: 6px 11px; border-radius: 999px;
+  }
+  #langSwitch button[aria-pressed="true"] { background: #9a9a7e; color: #fff; }
 </style>
 </head>
 <body>
   <div id="loading">Cargando…</div>
   <iframe id="frame" title="Marlene Pauletich San Juan — Portfolio" scrolling="no"></iframe>
+  <div id="langSwitch" role="group" aria-label="Idioma / Language">
+    <button type="button" data-lang="es" lang="es">ES</button>
+    <button type="button" data-lang="en" lang="en">EN</button>
+  </div>
 <script>
 (function(){
   var FILES = {
@@ -208,7 +223,37 @@
     } catch (e) { console.log('[swipe-debug] attachSwipeBack FAILED (cross-origin?):', e && e.message); }
   }
 
+  // --- Idioma (ES/EN) ---
+  // Las traducciones están escritas a mano dentro de cada página (atributos
+  // data-en); acá solo se elige el idioma y se le avisa a la página cargada.
+  // Sin elección previa, se usa inglés si el navegador no está en español.
+  var LANG_KEY = 'siteLang';
+  var lang = null;
+  try { lang = localStorage.getItem(LANG_KEY); } catch (e) {}
+  if (lang !== 'es' && lang !== 'en') {
+    lang = /^es\b/i.test(navigator.language || 'es') ? 'es' : 'en';
+  }
+  var langButtons = document.querySelectorAll('#langSwitch button');
+  // Junto con el idioma se manda el alto de la ventana: dentro del iframe "100vh"
+  // es el alto del propio iframe (toda la página), no el de la pantalla, y las
+  // portadas lo necesitan para ocupar justo la primera vista.
+  function sendLang(){
+    try { frame.contentWindow.postMessage({ __siteLang: lang, __siteVH: window.innerHeight }, '*'); } catch (e) {}
+  }
+  function setLang(l){
+    lang = l;
+    try { localStorage.setItem(LANG_KEY, l); } catch (e) {}
+    document.documentElement.lang = l;
+    langButtons.forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-lang') === l ? 'true' : 'false'); });
+    sendLang();
+  }
+  langButtons.forEach(function(b){
+    b.addEventListener('click', function(){ setLang(b.getAttribute('data-lang')); });
+  });
+  setLang(lang);
+
   frame.addEventListener('load', function(){
+    sendLang();
     loading.classList.add('hidden');
     var home = isHome();
     setHomeLock(home);
@@ -222,6 +267,7 @@
 
   window.addEventListener('hashchange', render);
   window.addEventListener('resize', function(){
+    sendLang();
     if (isHome()) return; // en Home la altura es fija (un viewport), no hay que recalcularla
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(resizeFrame, 120);
@@ -234,6 +280,12 @@
       if (location.hash === target) { render(); } else { location.hash = target; }
     } else if (data && data.__siteBack === true) {
       goBackSmart();
+    } else if (data && typeof data.__siteHeight === 'number' && ev.source === frame.contentWindow) {
+      // La página interna informa su altura (necesario al abrir el sitio como
+      // archivo local, donde no se puede medir el iframe desde aquí).
+      if (!isHome() && data.__siteHeight > 0) frame.style.height = data.__siteHeight + 'px';
+    } else if (data && data.__siteLangReq === true && ev.source === frame.contentWindow) {
+      sendLang();
     }
   });
 

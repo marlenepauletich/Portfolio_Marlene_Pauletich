@@ -1,0 +1,48 @@
+/* Textos que antes estaban dibujados dentro de las imágenes.
+   Todas las medidas van en cqw (ancho de .page), así escalan igual que la imagen. */
+.tx {
+  position: absolute; display: flex; align-items: center; margin: 0;
+  color: #171512; line-height: 1.22; white-space: nowrap; font-weight: 400;
+}
+.tx.c { justify-content: center; text-align: center; }
+.tx.l { justify-content: flex-start; text-align: left; }
+.tx.r { justify-content: flex-end; text-align: right; }
+/* Párrafos: bloque normal que fluye dentro del ancho original (en inglés cambia el largo) */
+.tx.wrap { display: block; white-space: normal; margin-top: -.3em; }
+.tx.serif { font-family: 'Merriweather', Georgia, serif; font-weight: 300; }
+.tx.sans { font-family: 'Elms Sans', 'Helvetica Neue', Arial, sans-serif; }
+.tx.mont { font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif; }
+.tx.eyebrow { letter-spacing: .186em; font-weight: 300; }
+/* Tabla de palabras (Trapo y porcelana): igual en los dos idiomas */
+.wtable { display: grid; letter-spacing: .14em; line-height: 1; align-items: center; }
+.tx p { margin: 0; }
+.tx p + p { margin-top: 1.22em; margin-top: 1lh; }
+.tx.light { color: #fff; }
+.tx.links a { color: inherit; text-decoration: none; }
+.tx.links a:hover { text-decoration: underline; text-underline-offset: .15em; }
+
+/* Portada: ocupa el alto de la primera vista y se corta por abajo (nunca se agranda,
+   así la pastilla dibujada en la foto queda en su lugar). --hero-h es el alto natural
+   de la foto; --site-vh lo manda el marco del sitio (fuera del marco, 100vh). */
+.cover { position: relative; overflow: hidden; line-height: 0; height: min(var(--site-vh, 100vh), var(--hero-h)); }
+.cover > img { display: block; width: 100%; height: auto; }
+
+/* Número del proyecto ("01 / 9"): esquina inferior derecha de la portada,
+   con el mismo margen abajo que a la derecha. */
+.page .counter {
+  top: auto !important; bottom: clamp(20px, 4vw, 48px);
+  right: clamp(20px, 4vw, 48px); transform: none; line-height: 1;
+}
+
+/* Imagen suelta con textos encima (páginas sin .page, como Florerías) */
+.ovwrap { position: relative; line-height: 0; container-type: inline-size; }
+.ovwrap > img { display: block; width: 100%; height: auto; }
+
+/* "Volver atrás": la pastilla sigue dibujada en la foto (se le borraron las letras);
+   este enlace va justo encima con el texto real */
+a.tx.pill {
+  justify-content: center; color: #fff; border-radius: 999px; text-decoration: none;
+  font-family: 'Elms Sans', 'Helvetica Neue', Arial, sans-serif; line-height: 1;
+  -webkit-tap-highlight-color: transparent; z-index: 2;
+}
+a.tx.pill:focus-visible { outline: 2px solid rgba(255,255,255,.9); outline-offset: 2px; }

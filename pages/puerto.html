@@ -1,17 +1,20 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" data-title-en="See you at the port? — Marlene Pauletich San Juan">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>¿Te veo en el puerto? — Marlene Pauletich San Juan</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500&family=Merriweather:wght@300&family=Elms+Sans:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="overlay.css">
 <style>
   :root { color-scheme: light; }
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; background: #fff; width: 100%; }
-  .page { position: relative; width: 100%; max-width: 1920px; margin: 0 auto; container-type: inline-size; }
+  /* --u = 1px of the original 1920px-wide artwork, so spacing scales with the page */
+  .page { position: relative; width: 100%; max-width: 1920px; margin: 0 auto; container-type: inline-size; padding-bottom: calc(140 * var(--u)); }
+  .page { --u: calc(min(100vw, 1920px) / 1920); }
   .imgwrap { position: relative; line-height: 0; }
   .imgwrap img { display: block; width: 100%; height: auto; }
   a.hotspot { position: absolute; display: block; text-indent: -9999px; outline: none; -webkit-tap-highlight-color: transparent; }
@@ -19,27 +22,68 @@
   /* "Volver atrás" pill — baked into the artwork at top left of the board */
   .hotspot--back {
     left: 0.833%;
-    top: 0.312%;
+    top: 2.63%;
     width: 10.365%;
-    height: 0.570%;
+    height: 4.84%;
     border-radius: 999px;
   }
   .counter {
-    position: absolute; top: 11.1%; right: clamp(20px, 4vw, 48px);
+    position: absolute; top: 94.2%; right: clamp(20px, 4vw, 48px);
     font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 6vw, 4rem);
     color: #fff; mix-blend-mode: difference; display: flex; align-items: baseline; gap: 14px;
-    pointer-events: none;
+    pointer-events: none; line-height: 1;
   }
   .counter .tot { font-size: .5em; opacity: .7; }
+
+  .intro { text-align: center; color: #111; padding: calc(26 * var(--u)) 20px calc(48 * var(--u)); }
+  .eyebrow {
+    margin: 0; font-family: 'Elms Sans', sans-serif; font-weight: 300;
+    font-size: max(11px, calc(28 * var(--u))); letter-spacing: .186em;
+  }
+  .title {
+    margin: max(10px, calc(30 * var(--u))) 0 0; font-family: 'Merriweather', serif; font-weight: 300;
+    font-size: max(26px, calc(58 * var(--u))); line-height: 1.15; letter-spacing: -.005em;
+  }
+  .poem {
+    margin: 0; padding: calc(90 * var(--u)) 20px calc(130 * var(--u)); text-align: center; color: #111;
+    font-family: 'Elms Sans', sans-serif; font-size: max(14px, calc(24 * var(--u))); line-height: 1.17;
+  }
+  .poem p { margin: 0; }
+  .poem p + p { margin-top: 1.17em; }
+  .section-title {
+    margin: 0; padding: 0 20px calc(30 * var(--u)); text-align: center; color: #111;
+    font-family: 'Merriweather', serif; font-weight: 300; font-size: max(20px, calc(44 * var(--u))); line-height: 1.2;
+  }
 </style>
 </head>
 <body><script>function __siteNav(r){try{parent.postMessage({__siteNav:r},"*");}catch(e){}return false;}</script>
   <div class="page">
-    <div class="imgwrap">
-      <img src="puerto.jpg" alt="¿Te veo en el puerto? — Proyecto 06 — Styling" draggable="false">
-      <a class="hotspot hotspot--back" href="#" onclick="return __siteNav('home/proyectos')" aria-label="Volver atrás">Volver atrás</a>
+    <div class="cover" style="--hero-h:61.354cqw">
+      <img src="puerto_hero_t.jpg" alt="¿Te veo en el puerto? — Proyecto 06 — Styling" draggable="false">
+      <a class="tx pill" style="left:0.833cqw;top:1.458cqw;width:10cqw;height:2.083cqw;font-size:1.026cqw;" href="#" onclick="return __siteNav('home/proyectos')" data-en="Back">Volver atrás</a>
       <div class="counter"><span>06</span><span class="tot">/ 9</span></div>
     </div>
+
+    <header class="intro">
+      <p class="eyebrow" data-en="Project 06 —&nbsp; Styling">Proyecto 06 —&nbsp; Styling</p>
+      <h1 class="title" data-en="See you at the port?">¿Te veo en el puerto?</h1>
+    </header>
+
+    <div class="imgwrap">
+      <img src="puerto_moodboard.jpg" alt="Moodboard del proyecto" draggable="false">
+    </div>
+
+    <div class="poem">
+      <p data-en="She goes to the port to wait,<br>it’s her place of meeting<br>or rather, of searching.">Ella va al puerto a esperar<br>es su espacio de encuentro<br>o búsqueda mejor dicho.</p>
+      <p data-en="You see her there every day<br>whatever the occasion,<br>she is ready,<br>waiting to set sail<br>just to be close to the sea.">La ves ahí todos los días<br>sin importar la ocasión<br>ella está lista,<br>esperando a navegar<br>con tal de estar cerca del mar.</p>
+    </div>
+
+    <h2 class="section-title" data-en="Photo shoot">Sesión de fotos</h2>
+
+    <div class="imgwrap">
+      <img src="puerto_fotos.jpg" alt="Sesión de fotos en el puerto" draggable="false">
+    </div>
   </div>
+<script src="i18n.js"></script>
 </body>
 </html>
