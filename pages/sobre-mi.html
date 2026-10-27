@@ -59,6 +59,29 @@
   .skillsPanel.active { display: block; }
   .upcPanel { display: none; }
   .upcPanel.active { display: block; }
+
+  /* Celular y tablet: todo en una columna (las posiciones fijas del diseño se enciman) */
+  @media (max-width: 900px) {
+    .page { padding: 0 18px 32px; }
+    .heroStage, .bodyStage { aspect-ratio: auto; margin-top: 0; }
+    .heroStage { padding-top: 56px; }
+    .abs { position: static; }
+    .backpill { top: 14px; right: 14px; font-size: 12px; padding: 6px 14px; }
+    .title { font-size: 30px; white-space: normal; margin: 0 0 16px; }
+    .photo { width: 100%; }
+    .caption { display: block; text-align: center; font-size: 11px; margin-top: 6px; white-space: normal; }
+    .bio { width: auto; font-size: 14px; line-height: 1.6; margin-top: 24px; }
+    .bodyStage { margin-top: 36px; }
+    .tab { font-size: 22px; margin-right: 26px; }
+    .introText, .skillsList { width: auto; font-size: 14px; line-height: 1.6; margin-top: 14px; }
+    .upcPanel.active { display: flex; flex-wrap: wrap; gap: 10px; }
+    .upcPanel .introText, .moreCaption, .tiktokLink { flex: 0 0 100%; }
+    .vidcell { position: relative !important; left: auto !important; top: auto !important;
+      width: calc(50% - 5px) !important; height: auto !important; aspect-ratio: 9 / 16; }
+    .vidcell video { width: 100%; height: 100%; object-fit: cover; }
+    .moreCaption, .tiktokLink { font-size: 13px; white-space: normal; word-break: break-all; }
+    .moreCaption { margin-top: 14px; }
+  }
 </style>
 </head>
 <body><script>function __siteNav(r){try{parent.postMessage({__siteNav:r},"*");}catch(e){}return false;}</script>
