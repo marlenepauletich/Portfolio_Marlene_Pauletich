@@ -227,12 +227,30 @@ body.editing #editFab{display:none;}
   var hoveredPanel = null;
   var indicator = document.getElementById('trackIndicator');
   var setWidth = 0;
-  function measure(){ setWidth = track.scrollWidth / 3; }
+  // largo exacto de una vuelta: scrollWidth/3 incluia el padding y cada vuelta pegaba un salto
+  function measure(){
+    setWidth = panels[panels.length / 3].offsetLeft - panels[0].offsetLeft;
+    if(isMobile) panels.forEach(function(p){
+      p.__left = p.offsetLeft;
+      p.style.zIndex = Math.round(10000 - p.__left); // el orden no cambia: basta con fijarlo una vez
+    });
+  }
+  window.addEventListener('resize', measure);
   requestAnimationFrame(function(){ measure(); track.scrollLeft = setWidth; });
 
   // la posicion vertical y la separacion se calculan segun la posicion EN PANTALLA
   // (no segun el indice), asi la forma queda fija y el contenido fluye a traves de ella.
   function layout(){
+    if(isMobile){
+      // solo las fotos visibles: escribir en las 30 en cada cuadro traba el celular
+      var sl = track.scrollLeft, vw = track.clientWidth;
+      var shift = 'translate3d(' + (-driftFrac).toFixed(3) + 'px,0,0) rotateY(-14deg)';
+      panels.forEach(function(p){
+        var left = p.__left - sl;
+        if(left > -400 && left < vw + 400) p.style.transform = shift;
+      });
+      return;
+    }
     panels.forEach(function(p){
       var naturalLeft = p.offsetLeft - track.scrollLeft;
       var ty = isMobile ? 0 : (-naturalLeft * RISE_K - GLOBAL_LIFT);
@@ -259,7 +277,7 @@ body.editing #editFab{display:none;}
     }
   }
 
-  var velocity = 0;
+  var velocity = 0, driftFrac = 0, lastFrame = 0;
   if(!isMobile){
     track.addEventListener('wheel', function(e){
       if(Math.abs(e.deltaY) > Math.abs(e.deltaX)){
@@ -270,8 +288,9 @@ body.editing #editFab{display:none;}
   }
   // en mobile: deriva sutil hacia la izquierda, para insinuar que se puede deslizar
   // (se pausa mientras el usuario toca la pantalla)
-  // muchos celulares redondean scrollLeft: sumarle 0.28 no lo mueve nunca, asi que la
-  // posicion real se lleva aparte. La pausa tras soltar deja terminar el deslizamiento.
+  // muchos celulares redondean scrollLeft a saltos de pixel: la posicion real se lleva aparte
+  // y lo que el telefono redondeo se compensa moviendo apenas las fotos, asi el avance es
+  // continuo. La pausa tras soltar deja terminar el deslizamiento.
   var userTouching = false, touchResume = null, driftPos = null;
   if(isMobile){
     track.addEventListener('touchstart', function(){ userTouching = true; clearTimeout(touchResume); }, {passive:true});
@@ -279,21 +298,26 @@ body.editing #editFab{display:none;}
     track.addEventListener('touchcancel', function(){ clearTimeout(touchResume); touchResume = setTimeout(function(){ userTouching = false; }, 1200); }, {passive:true});
   }
 
-  (function inertia(){
+  (function inertia(now){
+    var dt = (now && lastFrame) ? Math.min(now - lastFrame, 50) : 16.7;
+    lastFrame = now || 0;
     if(Math.abs(velocity) > 0.05){
       track.scrollLeft += velocity;
       velocity *= 0.82;
     } else { velocity = 0; }
     if(isMobile && !userTouching){
       if(driftPos === null || Math.abs(track.scrollLeft - driftPos) > 2) driftPos = track.scrollLeft;
-      driftPos += 0.28;
+      driftPos += 0.0168 * dt; // ~17 px por segundo, igual en pantallas de 60 y de 120 Hz
       track.scrollLeft = driftPos;
+      driftFrac = driftPos - track.scrollLeft;
+    } else if(isMobile){
+      driftFrac = 0;
     } else if(!isMobile && !isDown && Math.abs(velocity) < 0.05){
       track.scrollLeft += 0.6;
     }
     if(setWidth > 0){
-      if(track.scrollLeft >= setWidth * 2) track.scrollLeft -= setWidth;
-      if(track.scrollLeft <= 0) track.scrollLeft += setWidth;
+      if(track.scrollLeft >= setWidth * 2){ track.scrollLeft -= setWidth; if(driftPos !== null) driftPos -= setWidth; }
+      if(track.scrollLeft <= 0){ track.scrollLeft += setWidth; if(driftPos !== null) driftPos += setWidth; }
     }
     layout();
     requestAnimationFrame(inertia);
