@@ -1,3 +1,4 @@
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; } /* el teléfono no agranda la letra por su cuenta */
 /* Textos que antes estaban dibujados dentro de las imágenes.
    Todas las medidas van en cqw (ancho de .page), así escalan igual que la imagen. */
 .tx {

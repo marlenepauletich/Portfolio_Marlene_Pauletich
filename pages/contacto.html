@@ -14,12 +14,6 @@
   /* Datos de contacto: etiquetas a la derecha, datos a la izquierda (como en el diseño) */
   .cgrid { display: grid; grid-template-columns: 5.924cqw auto; column-gap: 1.953cqw; white-space: nowrap; }
   .cgrid .cl { text-align: right; }
-  @media (max-width: 900px) {
-    /* en el celular la tarjeta blanca crece para que los datos se lean */
-    .tx.card { left: 50% !important; transform: translateX(-50%); width: auto !important; height: auto !important;
-      background: #fff; padding: 12px 18px; font-size: 13px; line-height: 1.6 !important; }
-    .cgrid { grid-template-columns: auto auto; column-gap: 14px; }
-  }
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Elms+Sans:wght@300;400&family=Merriweather:wght@300&family=Montserrat:wght@400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="overlay.css">

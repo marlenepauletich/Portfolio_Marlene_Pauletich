@@ -10,7 +10,7 @@
   html, body { margin: 0; padding: 0; background: #fff; width: 100%; }
   #frame {
     display: block;
-    width: 100%;
+    width: 1px; min-width: 100%; /* iOS estira el iframe si solo se pone width:100% */
     border: 0;
     background: #fff;
     /* height is set by JS once the inner page reports its real size */
