@@ -64,28 +64,7 @@
     if (d && (d.__siteLang === 'es' || d.__siteLang === 'en')) apply(d.__siteLang);
   });
 
-  // Celular: los textos largos dibujados sobre una imagen quedan diminutos, así que se
-  // copian como bloque legible justo después de la imagen (el CSS muestra uno u otro).
-  // Se copian antes de traducir para que la copia guarde el español original.
-  function buildMobileCopies(){
-    document.querySelectorAll('.tx.long').forEach(function(el){
-      var wrap = el.parentElement;
-      if (!wrap.__mob) {
-        wrap.__mob = document.createElement('div');
-        wrap.__mob.className = 'mobtext';
-        wrap.parentNode.insertBefore(wrap.__mob, wrap.nextSibling);
-      }
-      var c = document.createElement('div');
-      c.className = el.className.replace(/\btx\b/, 'mt').replace(/\blong\b/, '');
-      if (parseFloat(el.style.left) > 20 && /\bl\b/.test(el.className)) c.className += ' indent';
-      c.innerHTML = el.innerHTML;
-      if (el.hasAttribute('data-en')) c.setAttribute('data-en', el.getAttribute('data-en'));
-      wrap.__mob.appendChild(c);
-    });
-  }
-
   function init(){
-    buildMobileCopies();
     apply(saved() || current || 'es');
     try { if (parent !== window) parent.postMessage({ __siteLangReq: true }, '*'); } catch(e){}
     window.addEventListener('load', reportHeight);

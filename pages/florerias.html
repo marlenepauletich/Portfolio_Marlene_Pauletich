@@ -38,8 +38,8 @@ nav a:hover{opacity:1;}
 .hero{position:relative;width:100%;height:min(var(--site-vh,100vh),57.19vw);overflow:hidden;background:#f1efe9;} /* portada: alto de la primera vista, cortada (57.19vw = alto natural de la foto) */
 .hero .imgslot{position:absolute;inset:0;width:100%;height:100%;}
 .hero img,.hero .ph{width:100%;height:100%;object-fit:cover;display:block;}
-.counter{position:absolute;right:clamp(20px,4vw,48px);bottom:clamp(20px,4vw,48px);line-height:1;font-family:'Playfair Display',serif;
-  font-size:clamp(2.2rem,6vw,4rem);color:#fff;mix-blend-mode:difference;display:flex;align-items:baseline;gap:14px;}
+.counter{position:absolute;right:min(48px,3.33vw);bottom:min(48px,3.33vw);line-height:1;font-family:'Playfair Display',serif;
+  font-size:min(4rem,4.44vw);color:#fff;mix-blend-mode:difference;display:flex;align-items:baseline;gap:min(14px,.97vw);}
 .counter .tot{font-size:.5em;opacity:.7;}
 
 section.about{padding:150px clamp(20px,4vw,48px) 120px;}
@@ -66,12 +66,12 @@ section.gallery{padding:0;display:flex;flex-direction:column;gap:10px;}
 .imgslot{position:relative;background:#f1efe9;overflow:hidden;}
 .row.c1 .imgslot{height:auto;aspect-ratio:16/9;}
 .row.c2 .imgslot,.row.c3 .imgslot{height:auto;aspect-ratio:4/5;}
-section.charselect{padding:90px clamp(8px,1.5vw,20px) 70px;}
-.charselect .heading{text-align:center;max-width:800px;margin:0 auto 40px;}
+section.charselect{padding:min(90px,6.25vw) min(20px,1.39vw) min(70px,4.86vw);}
+.charselect .heading{text-align:center;max-width:800px;margin:0 auto min(40px,2.78vw);}
 .charselect h2{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:600;line-height:1.1;}
-.chargrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:2200px;margin:0 auto;}
-@media(max-width:700px){.chargrid{grid-template-columns:1fr 1fr;}}
-@media(max-width:460px){.chargrid{grid-template-columns:1fr;}}
+.chargrid{display:grid;grid-template-columns:repeat(4,1fr);gap:min(10px,.7vw);max-width:2200px;margin:0 auto;}
+
+
 .chargrid .imgslot{aspect-ratio:1600/2500;cursor:pointer;
   transition:transform .4s cubic-bezier(.2,.8,.2,1),opacity .4s ease,box-shadow .4s ease;}
 .chargrid:hover .imgslot{opacity:.7;}
@@ -132,30 +132,30 @@ h2.ftitle{font-family:'Merriweather',Georgia,serif;font-weight:400;font-size:2.3
 
 <section class="about" style="padding:0;">
   <div class="ovwrap" style="aspect-ratio:5760/850">
-      <div class="tx sans c eyebrow" style="left:37.639cqw;top:2.778cqw;width:27.205cqw;height:1.337cqw;--fs:1.372cqw;--fsmin:10px;letter-spacing:.188em;" data-en="Project 01 — Fashion Design">Proyecto 01 — Diseño de moda</div>
-      <div class="tx serif c" style="left:31.615cqw;top:6.233cqw;width:36.615cqw;height:3.09cqw;--fs:2.927cqw;--fsmin:17px;" data-en="Flower shops are the prism.">Las florerías son el prisma.</div>
+      <div class="tx sans c eyebrow" style="left:37.639cqw;top:2.778cqw;width:27.205cqw;height:1.337cqw;--fs:1.372cqw;letter-spacing:.188em;" data-en="Project 01 — Fashion Design">Proyecto 01 — Diseño de moda</div>
+      <div class="tx serif c" style="left:31.615cqw;top:6.233cqw;width:36.615cqw;height:3.09cqw;--fs:2.927cqw;" data-en="Flower shops are the prism.">Las florerías son el prisma.</div>
   </div>
 </section>
 
-<section class="prisma-fill" style="display:flex;flex-direction:column;gap:10px;">
-  <div class="ovwrap" style="margin-bottom:70px;"><img src="flor_moodboard_t.jpg" alt="Moodboard">
-      <div class="tx serif r" style="left:80.423cqw;top:52.731cqw;width:6.5cqw;height:0.923cqw;--fs:1.146cqw;--fsmin:10px;" data-en="moodboard.">moodboard.</div>
+<section class="prisma-fill" style="display:flex;flex-direction:column;gap:min(10px,.7vw);">
+  <div class="ovwrap" style="margin-bottom:min(70px,4.86vw);"><img src="flor_moodboard_t.jpg" alt="Moodboard">
+      <div class="tx serif r" style="left:80.423cqw;top:52.731cqw;width:6.5cqw;height:0.923cqw;--fs:1.146cqw;" data-en="moodboard.">moodboard.</div>
   </div>
   <div class="ovwrap" style=""><img src="flor_texto_t.jpg" alt="Las florerías, sobre la colección">
-      <div class="tx long sans l wrap" style="left:27.154cqw;top:28.923cqw;width:28.038cqw;height:20cqw;--fs:1.112cqw;--fsmin:10px;line-height:1.315;" data-en="<p>Drawing on colour theory — which explains how white light breaks down into its full spectrum when it passes through a prism, casting a rainbow onto a surface —, flower shops, and more precisely flowers, are a medium that creates a reflection of colour, spreading life through the urban landscape.</p><p>This medium transforms cities and their grey bustle. With this collection I set out to honour that idea through silhouettes and printed fabrics inspired by the flowers you can find at the neighbourhood florist, the one hidden in the middle of the city.</p>"><p>Haciendo alusión a la teoría del color — la cual explica cómo la luz blanca se descompone en todo su espectro de color al pasar por un prisma, reflejando el arcoíris en la superficie —, las florerías, y más exactamente las flores, son un medio por el cual se genera un reflejo de color que expande vida en el ámbito urbano.</p><p>Este medio transforma las ciudades y su bullicio gris. Con esta colección busco hacer honor a ese concepto a través de siluetas y tejidos estampados inspirados en las flores que se pueden ver en la floristería del barrio, esa que está camuflada en plena ciudad.</p></div>
+      <div class="tx sans l wrap" style="left:27.154cqw;top:28.923cqw;width:28.038cqw;height:20cqw;--fs:1.112cqw;line-height:1.315;" data-en="<p>Drawing on colour theory — which explains how white light breaks down into its full spectrum when it passes through a prism, casting a rainbow onto a surface —, flower shops, and more precisely flowers, are a medium that creates a reflection of colour, spreading life through the urban landscape.</p><p>This medium transforms cities and their grey bustle. With this collection I set out to honour that idea through silhouettes and printed fabrics inspired by the flowers you can find at the neighbourhood florist, the one hidden in the middle of the city.</p>"><p>Haciendo alusión a la teoría del color — la cual explica cómo la luz blanca se descompone en todo su espectro de color al pasar por un prisma, reflejando el arcoíris en la superficie —, las florerías, y más exactamente las flores, son un medio por el cual se genera un reflejo de color que expande vida en el ámbito urbano.</p><p>Este medio transforma las ciudades y su bullicio gris. Con esta colección busco hacer honor a ese concepto a través de siluetas y tejidos estampados inspirados en las flores que se pueden ver en la floristería del barrio, esa que está camuflada en plena ciudad.</p></div>
   </div>
-  <div class="ovwrap" style="margin-bottom:70px;"><img src="flor_sketchbook_t.jpg" alt="Sketchbook y paleta de color">
-      <div class="tx serif l" style="left:4.692cqw;top:36.577cqw;width:6.577cqw;height:0.885cqw;--fs:1.173cqw;--fsmin:10px;" data-en="sketchbook.">sketchbook.</div>
-      <div class="tx serif r" style="left:88.231cqw;top:17.615cqw;width:7.115cqw;height:1.154cqw;--fs:1.192cqw;--fsmin:10px;" data-en="colour palette.">color palette.</div>
+  <div class="ovwrap" style="margin-bottom:min(70px,4.86vw);"><img src="flor_sketchbook_t.jpg" alt="Sketchbook y paleta de color">
+      <div class="tx serif l" style="left:4.692cqw;top:36.577cqw;width:6.577cqw;height:0.885cqw;--fs:1.173cqw;" data-en="sketchbook.">sketchbook.</div>
+      <div class="tx serif r" style="left:88.231cqw;top:17.615cqw;width:7.115cqw;height:1.154cqw;--fs:1.192cqw;" data-en="colour palette.">color palette.</div>
   </div>
-  <div class="ovwrap" style="margin-bottom:70px;"><img src="flor_lineup1_t.jpg" alt="Primera propuesta de lineup">
-      <div class="tx serif r" style="left:81.808cqw;top:15.115cqw;width:15.808cqw;height:0.962cqw;--fs:1.177cqw;--fsmin:10px;" data-en="first line-up proposal.">primera propuesta de lineup.</div>
+  <div class="ovwrap" style="margin-bottom:min(70px,4.86vw);"><img src="flor_lineup1_t.jpg" alt="Primera propuesta de lineup">
+      <div class="tx serif r" style="left:81.808cqw;top:15.115cqw;width:15.808cqw;height:0.962cqw;--fs:1.177cqw;" data-en="first line-up proposal.">primera propuesta de lineup.</div>
   </div>
   <div class="ovwrap" style=""><img src="flor_cuadro_t.jpg" alt="Cuadro de colección">
-      <div class="tx serif l" style="left:4.885cqw;top:0cqw;width:21.731cqw;height:1.769cqw;--fs:2.335cqw;--fsmin:17px;font-weight:400;" data-en="Collection overview">Cuadro de colección</div>
+      <div class="tx serif l" style="left:4.885cqw;top:0cqw;width:21.731cqw;height:1.769cqw;--fs:2.335cqw;font-weight:400;" data-en="Collection overview">Cuadro de colección</div>
   </div>
   <div class="ovwrap" style=""><img src="flor_lineup_t.jpg" alt="Lineup colección">
-      <div class="tx serif l" style="left:4.923cqw;top:0cqw;width:18.346cqw;height:2.423cqw;--fs:2.327cqw;--fsmin:17px;font-weight:400;" data-en="Collection line-up">Lineup colección</div>
+      <div class="tx serif l" style="left:4.923cqw;top:0cqw;width:18.346cqw;height:2.423cqw;--fs:2.327cqw;font-weight:400;" data-en="Collection line-up">Lineup colección</div>
   </div>
 </section>
 
@@ -188,17 +188,17 @@ h2.ftitle{font-family:'Merriweather',Georgia,serif;font-weight:400;font-size:2.3
   </div>
 </section>
 
-<section class="prisma-fill" style="display:flex;flex-direction:column;gap:10px;">
+<section class="prisma-fill" style="display:flex;flex-direction:column;gap:min(10px,.7vw);">
   <img src="assets/9e71a6d41991d63b89e0bc31f9c4485f.jpg" style="width:100%;height:auto;display:block;" alt="Las florerías son el prisma">
   <img src="assets/6cc45604e2fe2e030a96154aaa759607.jpg" style="width:100%;height:auto;display:block;" alt="Las florerías son el prisma">
 </section>
 
 
-<section style="padding:110px clamp(20px,4vw,48px) 70px;">
-  <div style="text-align:center;max-width:800px;margin:0 auto 40px;">
+<section style="padding:min(110px,7.64vw) min(48px,3.33vw) min(70px,4.86vw);">
+  <div style="text-align:center;max-width:800px;margin:0 auto min(40px,2.78vw);">
     <h2 class="ftitle">Fashion film</h2>
   </div>
-  <video src="assets/256515c81ed9bf2181075f0b8b59edea.mp4" controls playsinline preload="metadata" style="display:block;width:100%;max-width:1100px;height:auto;margin:0 auto;background:#000;"></video>
+  <video src="assets/256515c81ed9bf2181075f0b8b59edea.mp4" controls playsinline preload="metadata" style="display:block;width:100%;max-width:min(1100px,76.4vw);height:auto;margin:0 auto;background:#000;"></video>
 </section>
 
 <button id="editFab" style="display: none;">📸 Subir mis fotos / editar textos</button>

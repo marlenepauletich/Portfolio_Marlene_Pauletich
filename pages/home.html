@@ -270,11 +270,13 @@ body.editing #editFab{display:none;}
   }
   // en mobile: deriva sutil hacia la izquierda, para insinuar que se puede deslizar
   // (se pausa mientras el usuario toca la pantalla)
-  var userTouching = false;
+  // muchos celulares redondean scrollLeft: sumarle 0.28 no lo mueve nunca, asi que la
+  // posicion real se lleva aparte. La pausa tras soltar deja terminar el deslizamiento.
+  var userTouching = false, touchResume = null, driftPos = null;
   if(isMobile){
-    track.addEventListener('touchstart', function(){ userTouching = true; }, {passive:true});
-    track.addEventListener('touchend', function(){ userTouching = false; }, {passive:true});
-    track.addEventListener('touchcancel', function(){ userTouching = false; }, {passive:true});
+    track.addEventListener('touchstart', function(){ userTouching = true; clearTimeout(touchResume); }, {passive:true});
+    track.addEventListener('touchend', function(){ clearTimeout(touchResume); touchResume = setTimeout(function(){ userTouching = false; }, 1200); }, {passive:true});
+    track.addEventListener('touchcancel', function(){ clearTimeout(touchResume); touchResume = setTimeout(function(){ userTouching = false; }, 1200); }, {passive:true});
   }
 
   (function inertia(){
@@ -283,7 +285,9 @@ body.editing #editFab{display:none;}
       velocity *= 0.82;
     } else { velocity = 0; }
     if(isMobile && !userTouching){
-      track.scrollLeft += 0.28;
+      if(driftPos === null || Math.abs(track.scrollLeft - driftPos) > 2) driftPos = track.scrollLeft;
+      driftPos += 0.28;
+      track.scrollLeft = driftPos;
     } else if(!isMobile && !isDown && Math.abs(velocity) < 0.05){
       track.scrollLeft += 0.6;
     }
