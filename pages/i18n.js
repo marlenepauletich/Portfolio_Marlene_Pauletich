@@ -64,7 +64,52 @@
     if (d && (d.__siteLang === 'es' || d.__siteLang === 'en')) apply(d.__siteLang);
   });
 
+  // "Volver atrás" también al final de la página, para no tener que subir de nuevo.
+  // Es una copia del botón de arriba: mismo destino, mismo lado y mismo tamaño de letra.
+  // Se crea antes de traducir para que la copia guarde el texto en español.
+  function addBottomBack(){
+    var top = document.querySelector('a.tx.pill, a.backpill');
+    if (!top) return;
+    var style = document.createElement('style');
+    style.textContent =
+      '.backbottom-row{line-height:1;padding:2.4cqw .84cqw;}' +
+      '.backbottom{position:relative;display:inline-flex;align-items:center;justify-content:center;' +
+      'padding:.55em 2.3em;border-radius:999px;background:#9a9a7e;color:#fff;text-decoration:none;' +
+      "font-family:'Elms Sans','Helvetica Neue',Arial,sans-serif;font-weight:400;white-space:nowrap;" +
+      '-webkit-tap-highlight-color:transparent;}' +
+      '.backbottom:focus-visible{outline:2px solid #171512;outline-offset:2px;}' +
+      ".backbottom::after{content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);" +
+      'width:max(100%,88px);height:max(100%,44px);}';
+    document.head.appendChild(style);
+    var row = document.createElement('div');
+    row.className = 'backbottom-row';
+    var b = document.createElement('a');
+    b.className = 'backbottom';
+    b.href = '#';
+    b.setAttribute('onclick', top.getAttribute('onclick'));
+    b.innerHTML = top.innerHTML;
+    if (top.hasAttribute('data-en')) b.setAttribute('data-en', top.getAttribute('data-en'));
+    row.appendChild(b);
+    var host = document.querySelector('.page') || document.body;
+    host.appendChild(row);
+    function sync(){
+      // el blanco que la página ya dejaba al final pasa a quedar debajo del botón
+      host.style.paddingBottom = '';
+      var pb = parseFloat(getComputedStyle(host).paddingBottom) || 0;
+      host.style.paddingBottom = '0px';
+      row.style.paddingBottom = '';
+      if (pb > parseFloat(getComputedStyle(row).paddingBottom)) row.style.paddingBottom = pb + 'px';
+      var r = top.getBoundingClientRect();
+      b.style.fontSize = getComputedStyle(top).fontSize;
+      row.style.textAlign = (r.left + r.width / 2 > document.documentElement.clientWidth / 2) ? 'right' : 'left';
+    }
+    sync();
+    window.addEventListener('resize', sync);
+    window.addEventListener('load', sync);
+  }
+
   function init(){
+    addBottomBack();
     apply(saved() || current || 'es');
     try { if (parent !== window) parent.postMessage({ __siteLangReq: true }, '*'); } catch(e){}
     window.addEventListener('load', reportHeight);
